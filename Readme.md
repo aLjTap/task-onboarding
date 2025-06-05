@@ -9,7 +9,7 @@ Bu proje, bir oto galerisinin envanterindeki araçları kaydetmesine, görüntü
 *   **Mimari:** İstemci (Client) - Sunucu (Server)
 *   **Frontend (İstemci):**
     *   **Kütüphane/Framework:** React
-    *   **Yönlendirme (Routing):** React Router
+    *   **Yönlendirme (Routing):** Tanstack Router
     *   **Stil (Opsiyonel):** Tailwind CSS veya tercih edilen başka bir CSS çözümü (örn: Material UI, Bootstrap)
 *   **Backend (Sunucu):**
     *   **Framework:** Hono (Node.js üzerinde)
@@ -32,7 +32,7 @@ Bu proje, bir oto galerisinin envanterindeki araçları kaydetmesine, görüntü
     *   Kullanıcılar mevcut bir aracın bilgilerini (Marka, Model, Yıl, Fiyat, Açıklama, Görsel URL'si) düzenleyebilmelidir.
 4.  **Araç Silme:**
     *   Kullanıcılar galeriden bir aracı silebilmelidir.
-5.  **Frontend Yönlendirme (React Router):**
+5.  **Frontend Yönlendirme (Tanstack Router):**
     *   En azından aşağıdaki sayfalar için yönlendirme yapılmalıdır:
         *   Ana Sayfa / Araç Listesi (`/`)
         *   Yeni Araç Ekleme Sayfası (`/add-car`)
@@ -59,11 +59,11 @@ Bu proje, bir oto galerisinin envanterindeki araçları kaydetmesine, görüntü
     *   Drizzle migrasyonlarını oluşturup Turso'ya uygulayın.
     *   Hono'da yukarıda belirtilen tüm CRUD API endpoint'lerini (`/api/cars` altında) Drizzle ORM kullanarak implemente edin.
     *   Gelen isteklerde temel validasyonları ekleyin (örn: fiyat pozitif bir sayı olmalı, yıl geçerli bir formatta olmalı).
-3.  **Frontend Arayüz Geliştirme (React & React Router):**
+3.  **Frontend Arayüz Geliştirme (React & Tanstack Router):**
     *   Araçları listeleyen bir ana sayfa (`CarList` bileşeni) oluşturun. Her araç bir `CarItem` bileşeni ile gösterilebilir.
     *   Yeni araç eklemek için bir form içeren bir sayfa/modal (`AddCarForm` bileşeni) oluşturun.
     *   Mevcut bir aracı düzenlemek için bir form içeren bir sayfa/modal (`EditCarForm` bileşeni) oluşturun. Bu forma tıklandığında, ilgili aracın ID'si ile `/edit-car/:id` rotasına gidilmelidir.
     *   Her araç öğesi için silme butonu ekleyin.
-    *   React Router ile bu sayfalar arasında gezinmeyi sağlayın.
+    *   Tanstack Router ile bu sayfalar arasında gezinmeyi sağlayın.
     *   Backend API'si ile etkileşim kurarak araç verilerini getirin, gönderin, güncelleyin ve silin.
 
