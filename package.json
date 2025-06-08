@@ -1,4 +1,12 @@
 {
+  "name": "task",  
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+"start": "bun --filter '*' dev"
+  },
+
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
     "drizzle-kit": "^0.31.1"

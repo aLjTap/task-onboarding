@@ -1,4 +1,3 @@
-// Starting server with Hono framework
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server'; // Bu önemli!
 import carsRoute from './routes/cars';
@@ -12,6 +11,6 @@ app.get('/', (c) => {
 app.route('/api/cars', carsRoute);
 
 // 💥 Burada sunucuyu başlat
-serve({ fetch: app.fetch, port: 3000 });
+serve({ fetch: app.fetch, port: procces.env.API_PORT});
 console.log("🚗 Galerim+ API çalışıyor: http://localhost:3000");
 
