@@ -1,0 +1,1 @@
+In this 'migration'file we are saving modifications of databse
