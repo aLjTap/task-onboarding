@@ -1,12 +1,13 @@
-import Database from 'better-sqlite3';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
+import { drizzle } from 'drizzle-orm/libsql';
 import { sqliteTable, integer, text } from 'drizzle-orm/sqlite-core';
 
-
-const db = new Database('./db.sqlite3');
-
-
-export const drizzleDb = drizzle(db);
+// Initialize drizzle with Turso (libsql) connection
+export const db = drizzle({
+  connection: {
+    url: process.env.TURSO_DATABASE_URL!,
+    authToken: process.env.TURSO_AUTH_TOKEN!
+  }
+});
 
 // cars table definition
 export const cars = sqliteTable('cars', {

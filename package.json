@@ -1,18 +1,20 @@
 {
-  "name": "task",  
+  "name": "task",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
-"start": "bun --filter '*' dev"
+    "start": "bun --filter '*' dev"
   },
-
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
-    "drizzle-kit": "^0.31.1"
+    "drizzle-kit": "^0.31.1",
+    "tsx": "^4.19.4"
   },
   "dependencies": {
+    "@libsql/client": "^0.15.9",
     "better-sqlite3": "^11.10.0",
+    "dotenv": "^16.5.0",
     "drizzle-orm": "^0.44.2"
   }
 }
