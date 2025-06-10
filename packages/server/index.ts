@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { Hono } from 'hono';
-import { serve } from '@hono/node-server'; // Bu önemli!
+import { serve } from '@hono/node-server'; 
 import carsRoute from './routes/cars';
 import { drizzle } from 'drizzle-orm/libsql';
 
@@ -20,7 +20,7 @@ app.get('/', (c) => {
 
 app.route('/api/cars', carsRoute);
 
-// 💥 Burada sunucuyu başlat
+// Burada sunucuyu başlat
 serve({ fetch: app.fetch, port: Number(process.env.API_PORT) });
 console.log(`🚗 Galerim+ API çalışıyor: http://localhost:${process.env.API_PORT}`);
 
