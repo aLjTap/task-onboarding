@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "target": "ES2022",
+    "jsx": "react-jsx",
+    "lib": ["ES2023", "DOM"],
+
+    "moduleDetection": "force",
+    "baseUrl": ".",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@client/*": ["./src/*"],
+      "@server/*": ["../server/src/*"]
+    },
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "strict": true,
+
+    "noFallthroughCasesInSwitch": true,
+    /* Bundler mode */
+    "noUncheckedIndexedAccess": true,
+    /* Linting */
+    "noUnusedParameters": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "exclude": ["${configDir}/lib"]
+}

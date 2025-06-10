@@ -1,7 +1,6 @@
 import React from 'react';
 import { RouterProvider, createRouter } from '@tanstack/react-router';
 import { routeTree } from './src/routeTree.gen';
-import './src/index.css';
 
 const router = createRouter({
   routeTree,
