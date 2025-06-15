@@ -8,90 +8,115 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as EditCarRouteImport } from './routes/edit-car'
+import { Route as AddCarRouteImport } from './routes/add-car'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as EditCarIdRouteImport } from './routes/edit-car/$id'
+import { Route as CarIdRouteImport } from './routes/car/$id'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as EditCarImport } from './routes/edit-car'
-import { Route as AddCarImport } from './routes/add-car'
-import { Route as IndexImport } from './routes/index'
-import { Route as EditCarIdImport } from './routes/edit-car/$id'
-import { Route as CarIdImport } from './routes/car/$id'
-
-// Create/Update Routes
-
-const EditCarRoute = EditCarImport.update({
+const EditCarRoute = EditCarRouteImport.update({
   id: '/edit-car',
   path: '/edit-car',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AddCarRoute = AddCarImport.update({
+const AddCarRoute = AddCarRouteImport.update({
   id: '/add-car',
   path: '/add-car',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const IndexRoute = IndexImport.update({
+const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const EditCarIdRoute = EditCarIdImport.update({
+const EditCarIdRoute = EditCarIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => EditCarRoute,
 } as any)
-
-const CarIdRoute = CarIdImport.update({
+const CarIdRoute = CarIdRouteImport.update({
   id: '/car/$id',
   path: '/car/$id',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
 
-// Populate the FileRoutesByPath interface
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/add-car': typeof AddCarRoute
+  '/edit-car': typeof EditCarRouteWithChildren
+  '/car/$id': typeof CarIdRoute
+  '/edit-car/$id': typeof EditCarIdRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/add-car': typeof AddCarRoute
+  '/edit-car': typeof EditCarRouteWithChildren
+  '/car/$id': typeof CarIdRoute
+  '/edit-car/$id': typeof EditCarIdRoute
+}
+export interface FileRoutesById {
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/add-car': typeof AddCarRoute
+  '/edit-car': typeof EditCarRouteWithChildren
+  '/car/$id': typeof CarIdRoute
+  '/edit-car/$id': typeof EditCarIdRoute
+}
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/add-car' | '/edit-car' | '/car/$id' | '/edit-car/$id'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/add-car' | '/edit-car' | '/car/$id' | '/edit-car/$id'
+  id: '__root__' | '/' | '/add-car' | '/edit-car' | '/car/$id' | '/edit-car/$id'
+  fileRoutesById: FileRoutesById
+}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  AddCarRoute: typeof AddCarRoute
+  EditCarRoute: typeof EditCarRouteWithChildren
+  CarIdRoute: typeof CarIdRoute
+}
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
+    '/edit-car': {
+      id: '/edit-car'
+      path: '/edit-car'
+      fullPath: '/edit-car'
+      preLoaderRoute: typeof EditCarRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/add-car': {
       id: '/add-car'
       path: '/add-car'
       fullPath: '/add-car'
-      preLoaderRoute: typeof AddCarImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof AddCarRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/edit-car': {
-      id: '/edit-car'
-      path: '/edit-car'
-      fullPath: '/edit-car'
-      preLoaderRoute: typeof EditCarImport
-      parentRoute: typeof rootRoute
-    }
-    '/car/$id': {
-      id: '/car/$id'
-      path: '/car/$id'
-      fullPath: '/car/$id'
-      preLoaderRoute: typeof CarIdImport
-      parentRoute: typeof rootRoute
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/edit-car/$id': {
       id: '/edit-car/$id'
       path: '/$id'
       fullPath: '/edit-car/$id'
-      preLoaderRoute: typeof EditCarIdImport
-      parentRoute: typeof EditCarImport
+      preLoaderRoute: typeof EditCarIdRouteImport
+      parentRoute: typeof EditCarRoute
+    }
+    '/car/$id': {
+      id: '/car/$id'
+      path: '/car/$id'
+      fullPath: '/car/$id'
+      preLoaderRoute: typeof CarIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
-
-// Create and export the route tree
 
 interface EditCarRouteChildren {
   EditCarIdRoute: typeof EditCarIdRoute
@@ -104,89 +129,12 @@ const EditCarRouteChildren: EditCarRouteChildren = {
 const EditCarRouteWithChildren =
   EditCarRoute._addFileChildren(EditCarRouteChildren)
 
-export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/add-car': typeof AddCarRoute
-  '/edit-car': typeof EditCarRouteWithChildren
-  '/car/$id': typeof CarIdRoute
-  '/edit-car/$id': typeof EditCarIdRoute
-}
-
-export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/add-car': typeof AddCarRoute
-  '/edit-car': typeof EditCarRouteWithChildren
-  '/car/$id': typeof CarIdRoute
-  '/edit-car/$id': typeof EditCarIdRoute
-}
-
-export interface FileRoutesById {
-  __root__: typeof rootRoute
-  '/': typeof IndexRoute
-  '/add-car': typeof AddCarRoute
-  '/edit-car': typeof EditCarRouteWithChildren
-  '/car/$id': typeof CarIdRoute
-  '/edit-car/$id': typeof EditCarIdRoute
-}
-
-export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/add-car' | '/edit-car' | '/car/$id' | '/edit-car/$id'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/add-car' | '/edit-car' | '/car/$id' | '/edit-car/$id'
-  id: '__root__' | '/' | '/add-car' | '/edit-car' | '/car/$id' | '/edit-car/$id'
-  fileRoutesById: FileRoutesById
-}
-
-export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AddCarRoute: typeof AddCarRoute
-  EditCarRoute: typeof EditCarRouteWithChildren
-  CarIdRoute: typeof CarIdRoute
-}
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AddCarRoute: AddCarRoute,
   EditCarRoute: EditCarRouteWithChildren,
   CarIdRoute: CarIdRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/",
-        "/add-car",
-        "/edit-car",
-        "/car/$id"
-      ]
-    },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/add-car": {
-      "filePath": "add-car.tsx"
-    },
-    "/edit-car": {
-      "filePath": "edit-car.tsx",
-      "children": [
-        "/edit-car/$id"
-      ]
-    },
-    "/car/$id": {
-      "filePath": "car/$id.tsx"
-    },
-    "/edit-car/$id": {
-      "filePath": "edit-car/$id.tsx",
-      "parent": "/edit-car"
-    }
-  }
-}
-ROUTE_MANIFEST_END */
